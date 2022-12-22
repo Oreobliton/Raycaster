@@ -1,11 +1,17 @@
-.DEFAULT_GOAL := build_and_run
+.DEFAULT_GOAL := install
+install_dir=build/
+source_dir=src/
 
-
-build_and_run: build run
 run:
-	./main
-build:
-	gcc main.c -lglut -lGL -o main
+	./$(install_dir)main
+
+install:
+	gcc $(source_dir)main.c -lglut -lGL -o $(install_dir)main
+
 debug:
-	gcc main.c -oO -lglut -lGL -o debug
+	gcc $(source_dir)main.c -oO -lglut -lGL -o $(install_dir)debug
+	gdb ./$(install_dir)debug
+
+clean: 
+	rm $(install_dir)*
 
